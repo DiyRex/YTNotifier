@@ -1,10 +1,6 @@
 import TelegramBot from 'node-telegram-bot-api';
-import dotenv from 'dotenv';
 
-dotenv.config();
-
-const token = process.env.BOT_TOKEN;
-
+function sendBotMessage(token,chatId,message){
 const bot = new TelegramBot(token, { polling: true });
 
 const sendTelegramMessage = (chatId, message) => {
@@ -16,5 +12,7 @@ const sendTelegramMessage = (chatId, message) => {
       console.error('Error sending message:', error.message);
     });
 };
+sendTelegramMessage(chatId,message);
+}
 
-export { sendTelegramMessage };
+export { sendBotMessage };

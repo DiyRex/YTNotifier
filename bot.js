@@ -1,13 +1,22 @@
 import { Masterchat, stringify } from "masterchat";
 import { extractUrlFromString } from "./assets/urlExtractor.js";
-import { sendTelegramMessage } from "./assets/tgPush.js";
+import { sendBotMessage } from "./assets/tgPush.js";
 import { getYoutubeID } from "./assets/getLink.js";
-import dotenv from 'dotenv';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-dotenv.config();
+let chatId = null;
+let token = null;
+
+const __filename = fileURLToPath(import.meta.url);
+const configPath = path.join(path.dirname(__filename), 'config.json');
+const configData = readFileSync(configPath, 'utf8');
+const config = JSON.parse(configData);
+chatId = config.CHAT_ID;
+token = config.BOT_TOKEN;
 
 const video_id = getYoutubeID();
-const chatId = process.env.CHAT_ID;
 const mc = await Masterchat.init(video_id);
 
 mc.on("chat", (chat) => {
@@ -16,7 +25,7 @@ mc.on("chat", (chat) => {
 
   if (result) {
     console.log("Extracted URL:", result.url);
-    sendTelegramMessage(chatId, result.inputString);
+    sendBotMessage(token,chatId, result.inputString);
   }
 
 });
