@@ -1,5 +1,5 @@
 import { Masterchat, stringify } from "masterchat";
-import { extractUrlFromString } from "./assets/urlExtractor.js";
+import { extractURL } from "./assets/urlExtractor.js";
 import { sendTelegramMessage } from "./assets/tgPush.js";
 import { getYoutubeID } from "./assets/getLink.js";
 import dotenv from 'dotenv';
@@ -12,7 +12,7 @@ const mc = await Masterchat.init(video_id);
 
 mc.on("chat", (chat) => {
   console.log(chat.authorName, stringify(chat.message));
-  const result = extractUrlFromString(stringify(chat.message));
+  const result = extractURL(stringify(chat.message));
 
   if (result) {
     console.log("Extracted URL:", result.url);
