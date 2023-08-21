@@ -1,10 +1,13 @@
-import getYouTubeID from 'get-youtube-id';
-export function extractURL(url) {
-  var id = getYouTubeID(url);
-  if(id){
-    return id;
+export function extractUrlFromString(inputString) {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const matches = inputString.match(urlRegex);
+
+  if (matches && matches.length > 0) {
+    return {
+      url: matches[0],         // Return the first URL found
+      inputString: inputString // Return the input string as well
+    };
   }
-  else{
-    return null;
-  }
+
+  return null; // No URL found
 }

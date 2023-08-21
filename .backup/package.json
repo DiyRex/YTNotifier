@@ -1,0 +1,22 @@
+{
+  "name": "ytnotifier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "type": "module",
+  "scripts": {
+    "start": "node bot.js",
+    "setup": "node setup.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "get-youtube-id": "^1.0.1",
+    "masterchat": "^1.1.0",
+    "node-telegram-bot-api": "^0.61.0",
+    "prompt-sync": "^4.2.0"
+  }
+}
